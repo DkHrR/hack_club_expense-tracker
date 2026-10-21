@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Expense Tracker</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Expense Tracker</h1>
+    <p>Track where does your money is getting spended </p>
+    <form id="expense-form">
+        <input 
+        type="text" 
+        id="Expense-name"
+        placeholder="what did you spend on the money?"
+        required>
+
+        <input 
+        type="number"
+        id="Expense-amount"
+        placeholder="What is the amount you spent"
+        step="0.01"
+        min="0.01"
+        required>
+
+        <button type="submit">Add Expense</button>
+
+    </form>
+
+    <script src="script.js"></script>
+</body>
+</html>
