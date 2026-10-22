@@ -16,6 +16,10 @@ form.addEventListener("submit", function (event) {
 
     const expenseList = document.getElementById("expense-list");
     const expenseitem = document.getElementById("list-item");
+
+    const newExpenseItem = document.createElement("li");
+    newExpenseItem.textContent = expenseName;
+
     
 
 
