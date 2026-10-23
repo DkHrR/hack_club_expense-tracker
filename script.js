@@ -37,6 +37,12 @@ form.addEventListener("submit", function (event) {
     const deleteButton = document.createElement("button");
     deleteButton.textContent = "Delete";
     newExpenseItem.appendChild(deleteButton);
+    deleteButton.addEventListener("click", function () {
+        newExpenseItem.remove();
+        total -= amount;
+        TotalAmount.textContent = total.toFixed(2);
+
+    });
 
     
     form.reset();
