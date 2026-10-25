@@ -1,4 +1,14 @@
 const form = document.getElementById("expense-form");
+const expenseNameInput = document.getElementById("expense-name");
+const formError = document.getElementById("form-error");
+
+
+expenseNameInput.addEventListener("input", function () {
+    formError.textContent = "";
+});
+
+
+
 
 console.log("javascript is working");
 console.log("form found:", form);
@@ -32,6 +42,12 @@ function saveExpenses() {
 
 
 
+function applyFilters() {
+    selectedCategory = categoryfilter.value;
+    displayExpenses();
+    displaySummary();
+
+}
 
 
 function displayExpenses() {
@@ -41,13 +57,29 @@ function displayExpenses() {
         expenseList.innerHTML = "";
         total = 0;
 
+        const startDate = startDateFilter.value;
+        const endDate = endDateFilter.value;
+
+
         const filteredExpenses = expenses
         .map(function (expense, index) {
-            return { expense: expense, index: index };
+            return { expense, index };
         })
         .filter(function (item) {
-            return selectedCategory === "All" ||
-            item.expense.category === selectedCategory;
+            const expense = item.expense;
+
+            const matchesCategory =
+                selectedCategory === "All" ||
+                expense.category === selectedCategory;
+
+            const matchesStartDate = 
+            startDate === "" || expense.date >= startDate;
+
+            const matchesEndDate =
+            endDate === "" || expense.date <= endDate;
+
+            return matchesCategory && matchesStartDate && matchesEndDate;
+            
 
         });
 
@@ -57,8 +89,22 @@ function displayExpenses() {
             total += expense.amount;
 
             const newExpenseItem = document.createElement("li");
+            const formattedDate = expense.date
+                ? new Date(expense.date + "T00:00:00").toLocaleDateString("en-IN", {
+                    day: "2-digit",
+                    month: "short",
+                    year: "numeric"
+
+
+                })
+                : "";
+
             newExpenseItem.textContent = 
-            expense.name + "- ₹" + expense.amount + " (" + (expense.category) + ")";
+            expense.name + " - ₹" + expense.amount +
+            " (" + expense.category + ") - " + 
+            (formattedDate ? "-" + formattedDate : "");
+
+
 
             expenseList.appendChild(newExpenseItem);
 
@@ -75,6 +121,8 @@ function displayExpenses() {
                 document.getElementById("expense-name").value = expense.name;
                 document.getElementById("expense-amount").value = expense.amount;
                 document.getElementById("expense-category").value = expense.category;
+                document.getElementById("expense-date").value = expense.date || "";
+
 
                 document.getElementById("expense-name").focus();
 
@@ -170,15 +218,27 @@ form.addEventListener("submit", function (event) {
     
 
     const expenseName = document.getElementById("expense-name").value;
+    if (expenseName.trim() === "") {
+        document.getElementById("form-error").textContent =
+        "Please enter an expense name.";
+        return;
+    }
+
+    document.getElementById("form-error").textContent = "";
+
     const expenseAmount = document.getElementById("expense-amount").value;
     const expensecategory = document.getElementById("expense-category").value;
+    const expenseDate = document.getElementById("expense-date").value;
+
     const amount = Number(expenseAmount);
     
     const expense = {
         name : expenseName,
         amount : amount,
-        category : expensecategory
+        category : expensecategory,
+        date: expenseDate
     };
+    
 
     if (editingIndex !== null) {
         expenses[editingIndex] = expense;
@@ -187,6 +247,11 @@ form.addEventListener("submit", function (event) {
         expenses.push(expense);
 
     }
+    selectedCategory = "All";
+    categoryfilter.value = "All";
+
+
+
 saveExpenses();
 displayExpenses();
 displaySummary();
@@ -203,6 +268,9 @@ displayExpenses();
 displaySummary();
 
 const categoryfilter = document.getElementById("category-filter");
+const startDateFilter = document.getElementById("start-date-filter");
+const endDateFilter = document.getElementById("end-date-filter");
+
 
 categoryfilter.addEventListener("change", function () {
     selectedCategory = categoryfilter.value;

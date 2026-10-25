@@ -70,7 +70,7 @@ form {
 
 
 #expense-list li button {
-    background-color: #ef4444;
+    background-color: #2563eb;
     color: white;
     padding : 6px 10px;
     margin-left: 12px;
@@ -89,5 +89,47 @@ form {
     font-weight: bold;
     color: #0ea044;
     
+
+}
+
+#category-summary {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+
+}
+
+#category-summary p {
+    background-color: white;
+    padding: 16px;
+    border-radius: 8px;
+    border: 1px solid #dbe3f0;
+    margin: 0;
+    min-width: 150px;
+    font-weight: bold;
+
+}
+
+#expense-list li button.edit-button {
+    background-color : #2563eb;
+
+}
+
+#expense-list li button.delete-button {
+    background-color: #ef4444;
+
+}
+
+#expense-list li button.delete-button:hover {
+    background-color: #dc2626;
+
+}
+
+#form-error {
+    color : #dc2626;
+    font-size: 16px;
+    margin-top: 8px;
+    font-weight: 600;
 
 }

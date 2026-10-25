@@ -24,7 +24,14 @@
         min="0.01"
         required>
 
-        <button type="submit">Add Expense</button>
+        <input
+        type="date"
+        id="expense-date"
+        required>
+
+
+        <button type="submit" id="submit-button">Add Expense</button>
+        <button type="button" id="cancel-edit-button" hidden>Cancel Edit </button>
 
         <select id="expense-category" required>
             <option value="">Choose a category</option>
@@ -39,6 +46,11 @@
 
     </form>
 
+    <p id="form-error" role="alert"></p> 
+
+    <h2>Spending Summary</h2>
+    <div id="category-summary"> </div>
+
     <h2>My Expenses</h2>
     <select id="category-filter">
         <option value="All">All categories</option>
@@ -48,6 +60,16 @@
         <option value="Shopping">Shopping</option>
         <option value="Bills">Bills</option>
         <option value="Other">Other</option>
+
+        <input
+        type="date"
+        id="start-date-filter">
+
+        <input
+        type="date"
+        id="end-date-filter">
+        
+
         
     </select>
     <ul id="expense-list">
