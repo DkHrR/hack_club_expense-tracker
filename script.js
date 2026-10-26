@@ -51,6 +51,10 @@ function applyFilters() {
     displayExpenses();
     displaySummary();
     displayMonthlySummary();
+    displayExpenseCount();
+
+    
+
 
 }
 
@@ -158,6 +162,7 @@ function displayExpenses() {
                 displayExpenses();
                 displaySummary();
                 displayMonthlySummary();
+                displayExpenseCount();
 
             });
             
@@ -235,11 +240,19 @@ function displayExpenses() {
 
 
 
+            
+
+
+
 
 
         });
+        function displayExpenseCount() {
+        document.getElementById("expense-count").textContent =
+        "Number of expenses: " + expenses.length;
 
-        
+        }
+
 
         filteredExpenses.forEach(function (expense) {
 
@@ -317,6 +330,10 @@ function displayCategoryChart() {
 
 
 
+
+    
+
+
     }
 }
 
@@ -370,6 +387,7 @@ displayExpenses();
 displaySummary();
 displayMonthlySummary();
 displayCategoryChart();
+displayExpenseCount();
 
     
     form.reset();
@@ -382,6 +400,8 @@ displayExpenses();
 displaySummary();
 displayMonthlySummary();
 displayCategoryChart();
+displayExpenseCount();
+
 
 
 
@@ -392,6 +412,7 @@ categoryfilter.addEventListener("change", function () {
     displaySummary();
     displayMonthlySummary();
     displayCategoryChart();
+    displayExpenseCount();
     console.log("summary function called");
 
 
@@ -402,6 +423,7 @@ startDateFilter.addEventListener("change", function () {
     displaySummary();
     displayMonthlySummary();
     displayCategoryChart();
+    
 });
 
 endDateFilter.addEventListener("change", function () {
@@ -409,11 +431,17 @@ endDateFilter.addEventListener("change", function () {
     displaySummary();
     displayMonthlySummary();
     displayCategoryChart();
+    displayExpenseCount();
+
+    
+        
      
     
 });
 
 
 
+
+    
 
     
